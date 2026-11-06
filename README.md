@@ -43,7 +43,7 @@ The number must be in international format with digits only: country code + numb
 - Edit the wording in `index.html`.
 - Change colors and layout in `style.css`.
 - Change the WhatsApp destination in `script.js`.
-- The cat artwork uses emoji and CSS animation, so no external GIF files are required.
+- The elephant and cat artwork use emoji and CSS animation, so no external GIF files are required.
 
 ## Privacy note
 

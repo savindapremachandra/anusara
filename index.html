@@ -16,17 +16,17 @@
     <section class="screen active" id="screen-question" aria-labelledby="question-title">
       <div class="cat-scene" aria-hidden="true">
         <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div>
-        <div class="cat">🐱</div>
+        <div class="cat">🐘</div>
         <div class="heart h1">♥</div><div class="heart h2">♥</div>
       </div>
       <p class="eyebrow">psst… Anusara</p>
       <h1 id="question-title">Will you go on<br> a date with me?</h1>
-      <p class="subtext">I have a tiny question and a very hopeful cat. 🥺</p>
+      <p class="subtext">I have a tiny question and a very hopeful elephant. 🥺</p>
       <div class="actions" id="question-actions">
         <button class="btn btn-primary" id="yes-button">YES! 💗</button>
         <button class="btn btn-ghost" id="no-button">No 🙈</button>
       </div>
-      <p class="microcopy" id="no-message" aria-live="polite">Choose wisely… this cat is emotionally invested.</p>
+      <p class="microcopy" id="no-message" aria-live="polite">Choose wisely… this elephant is emotionally invested.</p>
     </section>
 
     <section class="screen" id="screen-yes" aria-labelledby="yes-title">
@@ -46,8 +46,21 @@
       <form id="date-form">
         <label for="date">Our date</label>
         <input id="date" name="date" type="date" required>
-        <label for="time">A time that works for you</label>
-        <input id="time" name="time" type="time" required>
+        <label for="time-hour">A time that works for you <span class="label-cat" aria-hidden="true">🐱</span></label>
+        <div class="time-picker" role="group" aria-label="A time that works for you">
+          <select id="time-hour" name="time-hour" required aria-label="Hour">
+            <option value="" disabled selected>Hour</option>
+          </select>
+          <span class="time-colon" aria-hidden="true">:</span>
+          <select id="time-minute" name="time-minute" required aria-label="Minutes">
+            <option value="" disabled selected>Min</option>
+          </select>
+          <select id="time-period" name="time-period" required aria-label="AM or PM">
+            <option value="" disabled selected>AM/PM</option>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
         <label for="note">Anything you'd like to add? <span>(optional)</span></label>
         <textarea id="note" name="note" rows="2" placeholder="Maybe somewhere you'd love to go…"></textarea>
         <button class="btn btn-primary wide" type="submit">Confirm our date 💗</button>
