@@ -43,7 +43,8 @@ The number must be in international format with digits only: country code + numb
 - Edit the wording in `index.html`.
 - Change colors and layout in `style.css`.
 - Change the WhatsApp destination in `script.js`.
-- The elephant and cat artwork use emoji and CSS animation, so no external GIF files are required.
+- The GIFs live in the `gifs/` folder (`cute-elephant.gif`, `page-2.gif`, `last-page.gif`). Swap a file to change the artwork; keep the same filename or update `index.html`.
+- Food options for the "What's your tummy asking for?" screen are the buttons in `index.html`; the text in `data-food` is what goes into the WhatsApp message.
 
 ## Privacy note
 

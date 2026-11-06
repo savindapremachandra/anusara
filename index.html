@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#fff0f5">
   <meta name="description" content="A little date invitation for Anusara.">
   <title>A little question for Anusara 💗</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <div class="hearts" aria-hidden="true"></div>
@@ -16,12 +16,12 @@
     <section class="screen active" id="screen-question" aria-labelledby="question-title">
       <div class="cat-scene" aria-hidden="true">
         <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div>
-        <div class="cat">🐘</div>
+        <img class="gif gif-hero" src="gifs/cute-elephant.gif" alt="">
         <div class="heart h1">♥</div><div class="heart h2">♥</div>
       </div>
       <p class="eyebrow">psst… Anusara</p>
       <h1 id="question-title">Will you go on<br> a date with me?</h1>
-      <p class="subtext">I have a tiny question and a very hopeful elephant. 🥺</p>
+      <p class="subtext">I have a tiny question and a very hopeful&nbsp;elephant.&nbsp;🥺</p>
       <div class="actions" id="question-actions">
         <button class="btn btn-primary" id="yes-button">YES! 💗</button>
         <button class="btn btn-ghost" id="no-button">No 🙈</button>
@@ -30,7 +30,7 @@
     </section>
 
     <section class="screen" id="screen-yes" aria-labelledby="yes-title">
-      <div class="celebration-art" aria-hidden="true">😻</div>
+      <img class="gif gif-art" src="gifs/page-2.gif" alt="" aria-hidden="true">
       <div class="confetti-word">YAAAAAY!</div>
       <p class="eyebrow">best answer ever</p>
       <h1 id="yes-title">I'm so glad<br>you said yes!</h1>
@@ -40,7 +40,7 @@
 
     <section class="screen" id="screen-date" aria-labelledby="date-title">
       <div class="date-art" aria-hidden="true">💌</div>
-      <p class="eyebrow">one last little thing</p>
+      <p class="eyebrow">almost there</p>
       <h1 id="date-title">When are you free,<br>Anusara?</h1>
       <p class="subtext">Pick a date and time. I'll take care of the rest. 🌷</p>
       <form id="date-form">
@@ -50,10 +50,18 @@
         <div class="time-picker" role="group" aria-label="A time that works for you">
           <select id="time-hour" name="time-hour" required aria-label="Hour">
             <option value="" disabled selected>Hour</option>
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+            <option value="10">10</option><option value="11">11</option><option value="12">12</option>
           </select>
           <span class="time-colon" aria-hidden="true">:</span>
           <select id="time-minute" name="time-minute" required aria-label="Minutes">
             <option value="" disabled selected>Min</option>
+            <option value="00">00</option><option value="05">05</option><option value="10">10</option>
+            <option value="15">15</option><option value="20">20</option><option value="25">25</option>
+            <option value="30">30</option><option value="35">35</option><option value="40">40</option>
+            <option value="45">45</option><option value="50">50</option><option value="55">55</option>
           </select>
           <select id="time-period" name="time-period" required aria-label="AM or PM">
             <option value="" disabled selected>AM/PM</option>
@@ -63,13 +71,28 @@
         </div>
         <label for="note">Anything you'd like to add? <span>(optional)</span></label>
         <textarea id="note" name="note" rows="2" placeholder="Maybe somewhere you'd love to go…"></textarea>
-        <button class="btn btn-primary wide" type="submit">Confirm our date 💗</button>
+        <button class="btn btn-primary wide" type="submit">Next 💗</button>
       </form>
-      <p class="microcopy">This will open WhatsApp with your date suggestion ready to send.</p>
+    </section>
+
+    <section class="screen" id="screen-food" aria-labelledby="food-title">
+      <div class="date-art" aria-hidden="true">😋</div>
+      <p class="eyebrow">most important question</p>
+      <h1 id="food-title">What's your tummy<br>asking for?</h1>
+      <p class="subtext">Pick one and I'll find the perfect spot. 🍽️</p>
+      <div class="food-grid" id="food-options" role="group" aria-label="What would you like to eat?">
+        <button class="food-option" type="button" data-food="Pizza"><span class="food-emoji">🍕</span>Pizza</button>
+        <button class="food-option" type="button" data-food="Fried Rice"><span class="food-emoji">🍚</span>Fried Rice</button>
+        <button class="food-option" type="button" data-food="Pasta"><span class="food-emoji">🍝</span>Pasta</button>
+        <button class="food-option" type="button" data-food="Burgers"><span class="food-emoji">🍔</span>Burgers</button>
+        <button class="food-option" type="button" data-food="Biriyani"><span class="food-emoji">🍛</span>Biriyani</button>
+        <button class="food-option" type="button" data-food="Kottu"><span class="food-emoji">🥘</span>Kottu</button>
+      </div>
+      <p class="microcopy">Tap your favourite. This will open WhatsApp with everything ready to send.</p>
     </section>
 
     <section class="screen" id="screen-done" aria-labelledby="done-title">
-      <div class="celebration-art" aria-hidden="true">💖</div>
+      <img class="gif gif-art" src="gifs/last-page.gif" alt="" aria-hidden="true">
       <p class="eyebrow">it's a date!</p>
       <h1 id="done-title">I can't wait! 🥰</h1>
       <p class="subtext" id="confirmation-text">Your date suggestion is ready in WhatsApp.</p>
@@ -79,6 +102,6 @@
 
     <footer>made with a little courage & a lot of love <span>♡</span></footer>
   </main>
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

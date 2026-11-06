@@ -11,6 +11,7 @@ const WHATSAPP_NUMBER = "94775491306"; // Sri Lanka country code +94, no leading
 
 function showScreen(id) {
   screens.forEach(screen => screen.classList.toggle("active", screen.id === id));
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 yesButton.addEventListener("click", () => {
@@ -48,45 +49,65 @@ const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
   .toISOString().slice(0, 10);
 dateInput.min = localToday;
 
-// Fill the hour and minute dropdowns for the time picker.
 const hourSelect = document.getElementById("time-hour");
 const minuteSelect = document.getElementById("time-minute");
 const periodSelect = document.getElementById("time-period");
-for (let h = 1; h <= 12; h++) {
-  hourSelect.add(new Option(String(h), String(h)));
+
+// The hour/minute options live in index.html. This is only a safety net in case
+// an old cached copy of the page ever loads without them.
+if (hourSelect.options.length <= 1) {
+  for (let h = 1; h <= 12; h++) hourSelect.add(new Option(String(h), String(h)));
 }
-for (let m = 0; m < 60; m += 5) {
-  const mm = String(m).padStart(2, "0");
-  minuteSelect.add(new Option(mm, mm));
+if (minuteSelect.options.length <= 1) {
+  for (let m = 0; m < 60; m += 5) {
+    const mm = String(m).padStart(2, "0");
+    minuteSelect.add(new Option(mm, mm));
+  }
 }
+
+// What she picked on the date screen, kept until the food screen is answered.
+let chosen = { prettyDate: "", prettyTime: "", note: "" };
 
 dateForm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (!dateForm.reportValidity()) return;
 
   const date = new Date(`${dateInput.value}T00:00:00`);
-  const prettyDate = new Intl.DateTimeFormat("en-LK", {
+  chosen.prettyDate = new Intl.DateTimeFormat("en-LK", {
     weekday: "long", day: "numeric", month: "long", year: "numeric"
   }).format(date);
   let hour = Number(hourSelect.value) % 12;
   if (periodSelect.value === "PM") hour += 12;
   const minute = Number(minuteSelect.value);
-  const prettyTime = new Intl.DateTimeFormat("en-LK", {
+  chosen.prettyTime = new Intl.DateTimeFormat("en-LK", {
     hour: "numeric", minute: "2-digit"
   }).format(new Date(2000, 0, 1, hour, minute));
-  const note = document.getElementById("note").value.trim();
+  chosen.note = document.getElementById("note").value.trim();
 
-  const message = `Hey! ❤️ It's Anusara. I'd love to go on a date with you on ${prettyDate} at ${prettyTime}.${note ? `\nA little note: ${note}` : ""}\n\nCan't wait! 🥰`;
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  whatsappLink.href = url;
-  confirmationText.textContent = `Your suggestion: ${prettyDate} at ${prettyTime}. Tap below to send it on WhatsApp.`;
-  showScreen("screen-done");
-  celebrate();
+  showScreen("screen-food");
+});
+
+// Food choice: tapping an option finishes the flow.
+const foodOptions = [...document.querySelectorAll(".food-option")];
+foodOptions.forEach(button => {
+  button.addEventListener("click", () => {
+    foodOptions.forEach(b => b.classList.toggle("selected", b === button));
+    const food = button.dataset.food;
+    const foodEmoji = button.querySelector(".food-emoji").textContent;
+    const { prettyDate, prettyTime, note } = chosen;
+
+    const message = `Hey! ❤️ It's Anusara. I'd love to go on a date with you on ${prettyDate} at ${prettyTime}.\nMy tummy is asking for ${food} ${foodEmoji}${note ? `\nA little note: ${note}` : ""}\n\nCan't wait! 🥰`;
+    whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    confirmationText.textContent = `${prettyDate}, ${food} it is! ${foodEmoji} Be ready by ${prettyTime} and I'll be seeing you soon. 💗 Tap below to send it on WhatsApp.`;
+    showScreen("screen-done");
+    celebrate();
+  });
 });
 
 document.getElementById("start-over").addEventListener("click", () => {
   dateForm.reset();
   dateInput.min = localToday;
+  foodOptions.forEach(b => b.classList.remove("selected"));
   noButton.style.transform = "";
   noMessage.textContent = "Choose wisely… this elephant is emotionally invested.";
   showScreen("screen-question");
